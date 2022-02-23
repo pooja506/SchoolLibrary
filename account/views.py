@@ -32,9 +32,9 @@ class LoginView(generic.FormView):
             if user:
               login(self.request, user)
               if self.request.user.is_superuser:
-                return redirect('admin_dash')
+                return render(self.request,'account/admin_dash.html')
               else:
-                return redirect('user_dash')
+                return render(self.request,'account/user_dash.html')
         else:
             return render(
                 self.request,
@@ -45,10 +45,5 @@ class LoginView(generic.FormView):
 class LogoutView(generic.View):
     def get(self, request):
         logout(request)
-        return redirect(reverse_lazy("login"))
+        return redirect(reverse_lazy("account:login"))
 
-def UserDash(request):
-    return render(request, 'account/user_dash.html')
-
-def AdminDash(request):
-    return render(request, 'account/admin_dash.html')
