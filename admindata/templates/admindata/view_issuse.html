@@ -29,14 +29,15 @@
 	            <a href="">Profile</a>
 	          </li>
 	          <li>
-	              <a href="{% url 'user:student_viewbook' %}">View Books</a>
+	              <a href="">Add Book</a>
 	          </li>
 	          <li>
-              <a href="{%url 'user:change_password'%}">Change Password</a>
+              <a href="">Change Password</a>
 	          </li>
 	          <li>
-              <a href="{% url 'user:viewissuebook' %}">Issued Book</a>
+              <a href="">Issue Book</a>
 	          </li>
+              
 	        </ul>
 
 	       
@@ -67,7 +68,13 @@
 		<div class="row">
 			<div class="col-md">
 				<div class="card card-body">
-					<h5>Available Books</h5>
+					<h5>Issused Books</h5>
+					<table class="table">
+					<tr>
+					<th><a class="btn btn-sm btn-info" href="">Issuse Book</a></th>
+					</tr>
+					</table>
+
 				</div>
 				<div class="card card-body">
 					<table class="table">
@@ -78,21 +85,22 @@
                             <th>Deadline</th>
 							<th>Remaining Days</th>
 							<th>Fine</th>
-
 						</tr>
 
-						{% for context in contexts %}
+						{% for i in contexts %}
 							<tr>
-								<td>{{context.user}}</td>
-								<td>{{context.book}}</td>
-								<td>{{context.issused_date}}</td>
-								<td>{{context.deadline_expire}}</td>
-								{% if context.date_diff < 0 %}
-									<td style="color:red;">{{context.date_diff}}</td>
+								<td>{{i.user}}</td>
+								<td>{{i.book}}</td>
+								<td>{{i.issused_date}}</td>
+                                <td>{{i.deadline_expire}}</td>
+								{% if i.date_diff < 0 %}
+									<td style="color:red;">{{i.date_diff}}</td>
 								{% else %}
-									<td>{{context.date_diff}}</td>
+									<td>{{i.date_diff}}</td>
 								{% endif %}
-								<td>{{context.fine}}</td>
+								<td>{{i.fine}}</td>
+                                <td><a class="btn btn-sm btn-info" href="">Update</a></td>
+						        <td><a class="btn btn-sm btn-danger" href="">Return</a></td>
 							</tr>
 						{% endfor %}
 						
@@ -101,10 +109,8 @@
 			</div>
 			
 		</div>
-
-  <script src="{% static 'myapp/dashboard/js/jquery.min.js'%}"> </script>
+ <script src="{% static 'myapp/dashboard/js/jquery.min.js'%}"> </script>
     <script src="{% static 'myapp/dashboard/js/popper.js'%}"></script>
     <script src="{% static 'myapp/dashboard/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'myapp/dashboard/js/main.js'%}"> </script>
-  </body>
 </html>

@@ -98,11 +98,11 @@
           <div class="col-md-3">
                         <div class="card text-center bg-light" style="width: 300px">
                             <div class="card-header">
-                                <h5 class="card-title">Registered User</h5>
+                                <h5 class="card-title">Registered Student</h5>
                             </div>
                             <div class="card-body">
-                                <p class="card-text" style="color: black;font-size: 16px;">No. of Registered User: {{total_user}}</p>
-                                <a href="#" class="btn btn-warning" target="_blank">View Users</a>
+                                <p class="card-text" style="color: black;font-size: 16px;">No. of Registered Student: {{total_user}}</p>
+                                <a href="{% url 'admindata:viewstudent' %}" class="btn btn-warning" target="_blank">View Students</a>
                 </div>
             </div>
     </div>
