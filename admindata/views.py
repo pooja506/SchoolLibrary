@@ -11,6 +11,7 @@ from django.views.generic import (DetailView, CreateView, ListView, TemplateView
 
 class ViewStudent(LoginRequired404Mixin,SuperuserRequiredMixin,ListView):
     model = Student
+    queryset = Student.objects.all()
     template_name = 'admindata/view_user.html'
     context_object_name = 'contexts'
 
