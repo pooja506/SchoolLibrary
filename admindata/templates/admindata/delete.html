@@ -23,19 +23,17 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
-		  		<h1><a href="" class="logo">LMS</a></h1>
+		  		<h1><a href="{%url 'admindata:admin_dash' %}" class="logo">LMS</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <a href="">Profile</a>
+	          
+	          <li>
+	              <a href="{% url 'admindata:addbook' %}">Add Book</a>
 	          </li>
 	          <li>
-	              <a href="">Add Book</a>
+              <a href="{%url 'admindata:change_password' %}">Change Password</a>
 	          </li>
 	          <li>
-              <a href="">Change Password</a>
-	          </li>
-	          <li>
-              <a href="">Issue Book</a>
+              <a href="{% url 'admindata:issuebook' %}">Issue Book</a>
 	          </li>
               
 	        </ul>
@@ -64,53 +62,30 @@
             </div>
           </div>
         </nav>
+{% if messages %}
+{% for message in messages %}
+	<div class="alert alert-{{ message.tags }} alert-alert alert-info" role="alert">
+  <strong> {{ message }} </strong>
+  </div>{% endfor %}
+{% endif %}
+<br>
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+			<p>Are you sure you want to delete "{{ object }}"?</p>
 
-		<div class="row">
-			<div class="col-md">
-				<div class="card card-body">
-					<h5>Issused Books</h5>
-					<table class="table">
-					<tr>
-					<th><a class="btn btn-sm btn-info" href="">Issuse Book</a></th>
-					</tr>
-					</table>
-
-				</div>
-				<div class="card card-body">
-					<table class="table">
-						<tr>
-							<th>Student</th>
-							<th>Book Name</th>
-							<th>Issued Date</th>
-                            <th>Deadline</th>
-							<th>Remaining Days</th>
-							<th>Fine</th>
-						</tr>
-
-						{% for i in contexts %}
-							<tr>
-								<td>{{i.user}}</td>
-								<td>{{i.book}}</td>
-								<td>{{i.issused_date}}</td>
-                                <td>{{i.deadline_expire}}</td>
-								{% if i.date_diff < 0 %}
-									<td style="color:red;">{{i.date_diff}}</td>
-								{% else %}
-									<td>{{i.date_diff}}</td>
-								{% endif %}
-								<td>{{i.fine}}</td>
-                                <td><a class="btn btn-sm btn-info" href="">Update</a></td>
-						        <td><a class="btn btn-sm btn-danger" href="">Return</a></td>
-							</tr>
-						{% endfor %}
-						
-					</table>
-				</div>
-			</div>
-			
+			<form action="{% url 'admindata:deletebook' contexts.id  %}" method="POST">
+			{% csrf_token %}
+			<a class="btn btn-warning" href="{% url 'admindata:viewbook' %}">Cancel</a>
+			<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
 		</div>
- <script src="{% static 'myapp/dashboard/js/jquery.min.js'%}"> </script>
-    <script src="{% static 'myapp/dashboard/js/popper.js'%}"></script>
-    <script src="{% static 'myapp/dashboard/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'myapp/dashboard/js/main.js'%}"> </script>
+	</div>
+</div>
+   <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

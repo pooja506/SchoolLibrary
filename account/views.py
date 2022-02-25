@@ -11,8 +11,7 @@ class StudentRegister(generic.CreateView):
     # model = Student
     form_class = StudentSignUpForm
     template_name = 'account/register.html'
-    success_url = reverse_lazy('admin_dash')
-
+    
     def form_valid(self, form):
         form.save()
         return redirect('login')
@@ -32,9 +31,9 @@ class LoginView(generic.FormView):
             if user:
               login(self.request, user)
               if self.request.user.is_superuser:
-                return render(self.request,'account/admin_dash.html')
+                return redirect('admindata:admin_dash')
               else:
-                return render(self.request,'account/user_dash.html')
+                return redirect('user:user_dash')
         else:
             return render(
                 self.request,

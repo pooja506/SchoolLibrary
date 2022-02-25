@@ -23,17 +23,16 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
-		  		<h1><a href="{% url 'admindata:admin_dash' %}" class="logo">LMS</a></h1>
+		  		<h1><a href="{%url 'admindata:admin_dash' %}" class="logo">LMS</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	        
 	          <li>
-	              <a href="{% url 'admindata:addbook' %}">Add Book</a>
+	              <a href="{% url 'admindata:addbook'%}">Add Book</a>
 	          </li>
 	          <li>
               <a href="{%url 'admindata:change_password' %}">Change Password</a>
 	          </li>
 	          <li>
-              <a href="{% url 'admindata:issuebook' %}">Issue Book</a>
+              <a href="{% url 'admindata:issuebook'%}">Issue Book</a>
 	          </li>
               
 	        </ul>
@@ -62,47 +61,31 @@
             </div>
           </div>
         </nav>
+{% if messages %}
+{% for message in messages %}
+	<div class="alert alert-{{ message.tags }} alert-alert alert-info" role="alert">
+  <strong> {{ message }} </strong>
+  </div>{% endfor %}
+{% endif %}
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
 
-		<div class="row">
-			<div class="col-md">
-				<div class="card card-body">
-					<h5>Available Books</h5>
-					<table class="table">
-					<tr>
-					<th><a class="btn btn-sm btn-info" href=" {% url 'admindata:addbook'%} ">Add Book</a></th>
-					</tr>
-					</table>
-				</div>
-				<div class="card card-body">
-					<table class="table">
-						<tr>
-							<th>Name</th>
-							<th>Author</th>
-							<th>Book Number</th>
-                            <th>Price</th>
-							<th>Quantity</th>
-						</tr>
-
-						{% for i in contexts %}
-							<tr>
-								<td>{{i.name}}</td>
-								<td>{{i.author}}</td>
-								<td>{{i.book_no}}</td>
-                                <td>{{i.price}}</td>
-								<td>{{i.quantity}}</td>
-                                <td><a class="btn btn-sm btn-info" href="{%url 'admindata:updatebook' i.id%}">Update</a></td>
-						        <td><a class="btn btn-sm btn-danger" href="{%url 'admindata:deletebook' i.id%}">Delete</a></td>
-							</tr>
-						{% endfor %}
-						
-					</table>
-				</div>
-			</div>
-			
+			<form action="" method="POST">
+				{% csrf_token %}
+            
+				{{ form.as_p}}
+				
+				
+				<input type="submit" name="Submit">
+			</form>
+            
 		</div>
-
- <script src="{% static 'myapp/dashboard/js/jquery.min.js'%}"> </script>
+	</div>
+</div>
+  <script src="{% static 'myapp/dashboard/js/jquery.min.js'%}"> </script>
     <script src="{% static 'myapp/dashboard/js/popper.js'%}"></script>
     <script src="{% static 'myapp/dashboard/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'myapp/dashboard/js/main.js'%}"> </script>
+  </body>
 </html>

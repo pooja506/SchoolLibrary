@@ -21,5 +21,8 @@ class PasswordChangeView(LoginRequired404Mixin):
         template_name='user/changepassword.html', 
         success_url = reverse_lazy('user:change_password')
 
+class UserDashboard(LoginRequired404Mixin,TemplateView):
+    template_name='account/user_dash.html'
+
         
         
