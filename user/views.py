@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from account.models import Student
 from .models import Availablebook, Issuedbook
 from .mixins import LoginRequired404Mixin
 from django.urls import reverse_lazy
-from django.views.generic import (DetailView, FormView, ListView, TemplateView,
-                                  View)
+from django.views.generic import (
+    DetailView, 
+    ListView, 
+    TemplateView
+    )
 # Create your views here.
 class Student_viewbook(LoginRequired404Mixin,ListView):
     model = Availablebook
@@ -12,7 +13,7 @@ class Student_viewbook(LoginRequired404Mixin,ListView):
     context_object_name = 'contexts'
 
 
-class Student_viewissuebook(LoginRequired404Mixin,ListView):
+class StudentViewIssueBook(LoginRequired404Mixin,DetailView):
     model = Issuedbook
     template_name = 'user/view_issuebook.html'
     context_object_name = 'contexts'

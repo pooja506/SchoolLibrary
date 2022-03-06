@@ -27,6 +27,8 @@ class Issuedbook(models.Model):
 
     def __str__(self):
        return str(self.user)
+    
+
     @property
     def deadline_expire(self):
         dead= self.deadline
@@ -51,6 +53,8 @@ class Issuedbook(models.Model):
         if self.date_diff<0:
             fine=abs(self.date_diff)*10 
         return abs(fine)
+
+        
 @receiver(post_save,sender=Issuedbook)
 def bookscount(sender,instance,created,**kwargs):
 	

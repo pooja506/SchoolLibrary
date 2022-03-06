@@ -76,7 +76,7 @@
                     <h5 class="card-title">Available Books </h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text"style="color: black;font-size: 16px;">No. of Available Books:</p>
+                    <p class="card-text"style="color: black;font-size: 16px;">No. of Available Books:{{ total_user }}</p>
                     <a href="{% url 'admindata:viewbook'%}" class="btn btn-warning" target="_blank">View Available Books</a>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <h5 class="card-title">Issued Books</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text" style="color: black;font-size: 16px;">No. of Issued Books:{{total_iss}} </p>
+                    <p class="card-text" style="color: black;font-size: 16px;">No. of Issued Books:{{total_issue}} </p>
                     <a href="{% url 'admindata:viewissuebook'%}" class="btn btn-warning" target="_blank">View Issued Books</a>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                                 <h5 class="card-title">Registered Student</h5>
                             </div>
                             <div class="card-body">
-                                <p class="card-text" style="color: black;font-size: 16px;">No. of Registered Student: </p>
+                                <p class="card-text" style="color: black;font-size: 16px;">No. of Registered Student: {{total_book}}</p>
                                 <a href="{% url 'admindata:viewstudent' %}" class="btn btn-warning" target="_blank">View Students</a>
                 </div>
             </div>

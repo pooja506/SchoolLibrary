@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'admindata.apps.AdmindataConfig',
     'account.apps.AccountConfig',
     'user',
+    'rest_framework',
     
 ]
 
@@ -124,6 +125,15 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

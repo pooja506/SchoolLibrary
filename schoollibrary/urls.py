@@ -21,4 +21,7 @@ urlpatterns = [
     path('', include('account.urls')),
     path('user_dash/', include('user.urls')),
     path('admin_dash/', include('admindata.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('studentapi/', include('api.urls', namespace='student')),
+
 ]

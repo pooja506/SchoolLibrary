@@ -35,12 +35,14 @@ class ViewDashboard(LoginRequired404Mixin,SuperuserRequiredMixin,TemplateView):
     books = Availablebook.objects.all()
     users = Student.objects.all()
     booksis = Issuedbook.objects.all()
-    total_user = users.count()
-    total_iss = booksis.count()
-    total_book = books.count()
-    context = {'books': books, 'users': users, 'total_user': total_user,
-               'total_book': total_book, 'total_iss': total_iss}
     template_name=('account/admin_dash.html')
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context["total_user"] = self.users.count()
+        context["total_issue"] = self.booksis.count()
+        context["total_book"] = self.books.count()
+        return self.render_to_response(context)
 
 class IssueUpdateView(LoginRequired404Mixin,SuperuserRequiredMixin,UpdateView):
     template_name = 'admindata/updateissue.html'
@@ -63,7 +65,6 @@ class IssueDeleteView(LoginRequired404Mixin,DeleteView):
 class BookCreateView(LoginRequired404Mixin,CreateView):
     template_name = 'admindata/addbook.html'
     form_class = AddBookForm
-    queryset = Availablebook.objects.all()
     success_url = reverse_lazy('admindata:viewbook')
 
 class BookUpdateView(LoginRequired404Mixin,SuperuserRequiredMixin,UpdateView):
